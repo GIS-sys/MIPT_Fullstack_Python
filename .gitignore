@@ -1,23 +1,23 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+/hookies/node_modules
+/hookies/.pnp
+/hookies/.pnp.js
 
 # testing
-/coverage
+/hookies/coverage
 
 # production
-/build
+/hookies/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+/hookies/.DS_Store
+/hookies/.env.local
+/hookies/.env.development.local
+/hookies/.env.test.local
+/hookies/.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/hookies/npm-debug.log*
+/hookies/yarn-debug.log*
+/hookies/yarn-error.log*
