@@ -23,3 +23,15 @@ class DeleteFile(APIView):
     def get(self, request):
         print(request.body)
         return Response([])
+
+class SearchResults(APIView):
+    permission_classes = []
+    def post(self, request):
+        data = eval(request.body.decode("UTF-8"))
+        fileName = data["fileName"]
+        author = data["author"]
+        return Response([
+            {"id": "1", "filename": "!просто_приставка_вначале_" + fileName, "author": author},
+            {"id": "2", "filename": fileName, "author": "!просто_приставка_вначале_" + author}
+        ])
+

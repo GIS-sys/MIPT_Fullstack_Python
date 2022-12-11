@@ -38,7 +38,6 @@ function apiLogin(username, password) {
 }
 
 function apiGetUserData(callback) {
-  //return {"email": "api_user_email", "fullname": "api_user_fullname", "date_of_birth": "api_user_date_of_birth"};
   getAccessToken(localStorage.getItem("refresh_token"), (data) => {
     fetch('http://127.0.0.1:8000/api/userinfo/', {
       headers: {
@@ -112,11 +111,22 @@ function apiDeleteFile(fileId) {
   });
 }
 
-function apiSearch(fileName, author, dateFrom, dateTo) {
-  return [
-    {"id": "1", "filename": "просто_приставка_вначале_" + fileName, "author": author},
-    {"id": "2", "filename": fileName, "author": "просто_приставка_вначале_" + author}
-  ];
+function apiSearch(fileName, author, dateFrom, dateTo, callback) {
+  getAccessToken(localStorage.getItem("refresh_token"), (data) => {
+    fetch('http://127.0.0.1:8000/api/search/', {
+      headers: {
+      },
+      method: 'POST',
+      body: JSON.stringify({"fileName": fileName,
+                            "author": author,
+                            "dateFrom": dateFrom,
+                            "dateTo": dateTo})
+    })
+    .then(res => res.json())
+    .then(data => {
+      callback(data);
+    })
+  });
 }
 
 module.exports = { apiLogin, apiGetUserData, apiGetUserFiles, apiUploadFile, apiRegister, apiDownloadFile, apiDeleteFile, apiSearch };

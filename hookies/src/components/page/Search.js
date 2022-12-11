@@ -2,9 +2,10 @@ import { useForm } from 'react-hook-form';
 import { apiSearch, apiDownloadFile } from '../api/Api';
 
 function searchHandler(data) {
-  let searchResults = apiSearch(data["filename"], data["author"], data["datefrom"], data["dateto"]);
-  localStorage.setItem("searchresult", JSON.stringify(searchResults));
-  window.location.href = "/search";
+  apiSearch(data["filename"], data["author"], data["datefrom"], data["dateto"], (data => {
+    localStorage.setItem("searchresult", JSON.stringify(data));
+    window.location.href = "/search";
+  }));
 }
 
 function downloadFile(fileId) {
@@ -18,6 +19,9 @@ function Search(props) {
   } = useForm();
 
   let searchResults = JSON.parse(localStorage.getItem("searchresult"));
+  if (!searchResults) {
+    searchResults = []
+  }
   return (
     <table style={{'tableLayout': 'fixed', 'width': '100%', 'height': '100%'}}>
       <tbody>
