@@ -13,8 +13,8 @@ class UserInfo(APIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
     def get(self, request):
-        username = request.user
-        return Response({"email": username, "fullname": "fullnametmp", "date_of_birth": "api_user_date_of_birthw"})
+        username = str(request.user)
+        return Response({"email": str(username), "fullname": "fullnametmp", "date_of_birth": "api_user_date_of_birthw"})
 
 
 class UserFiles(APIView):
