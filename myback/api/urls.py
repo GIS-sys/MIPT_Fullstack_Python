@@ -20,5 +20,7 @@ urlpatterns = [
     path("userinfo/", UserInfo.as_view()),
     path("userfiles/", UserFiles.as_view()),
     path("delete_file/", DeleteFile.as_view()),
-    path("search/", SearchResults.as_view())
+    path("search/", SearchResults.as_view()),
+    path("upload_file/", UploadFile.as_view()),
+    path("get_file/", GetFile.as_view())
 ]

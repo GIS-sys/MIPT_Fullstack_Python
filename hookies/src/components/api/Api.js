@@ -69,7 +69,21 @@ function apiGetUserFiles(callback) {
 }
 
 function apiUploadFile(username, fileName, originalName, fileText) {
-  alert("Загружаем файл " + originalName + " (также известен как " + fileName + ") для юзера " + username + " с текстом:\n" + fileText);
+  getAccessToken(localStorage.getItem("refresh_token"), (data) => {
+    fetch('http://127.0.0.1:8000/api/upload_file/', {
+      headers: {
+          'Authorization': `Bearer ${data["access"]}`
+      },
+      method: 'POST',
+      body: JSON.stringify({"fileName": fileName, "username": username, "originalName": originalName, "fileText": fileText})
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      alert("File uploaded")
+      window.location.href = "/account";
+    })
+  });
 }
 
 function apiRegister(username, password, fullname, email, date_of_birth) {
@@ -77,21 +91,32 @@ function apiRegister(username, password, fullname, email, date_of_birth) {
 }
 
 function apiDownloadFile(fileId) {
-  let fileContent = "contentfromsite" + fileId;
-  let fileName = "filename.fromsite";
-  let fileExtension = ".txt";
-
-  const file = new File([fileContent], fileName + fileExtension, {
-    type: 'text/plain',
+  fetch('http://127.0.0.1:8000/api/get_file/', {
+    headers: {
+    },
+    method: 'GET',
   })
-  const link = document.createElement('a');
-  const url = URL.createObjectURL(file);
-  link.href = url;
-  link.download = file.name;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  window.URL.revokeObjectURL(url);
+  .then(res => res.json())
+  .then(data => {
+    //let fileContent = "contentfromsite" + fileId;
+    //let fileName = "filename.fromsite";
+    //let fileExtension = ".txt";
+    let fileContent = data["content"];
+    let fileName = data["name"];
+    let fileExtension = data["extension"];
+  
+    const file = new File([fileContent], fileName + fileExtension, {
+      type: 'text/plain',
+    })
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(file);
+    link.href = url;
+    link.download = file.name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  })
 }
 
 function apiDeleteFile(fileId) {
@@ -112,7 +137,7 @@ function apiDeleteFile(fileId) {
 }
 
 function apiSearch(fileName, author, dateFrom, dateTo, callback) {
-  getAccessToken(localStorage.getItem("refresh_token"), (data) => {
+  //getAccessToken(localStorage.getItem("refresh_token"), (data) => {
     fetch('http://127.0.0.1:8000/api/search/', {
       headers: {
       },
@@ -126,7 +151,7 @@ function apiSearch(fileName, author, dateFrom, dateTo, callback) {
     .then(data => {
       callback(data);
     })
-  });
+  //});
 }
 
 module.exports = { apiLogin, apiGetUserData, apiGetUserFiles, apiUploadFile, apiRegister, apiDownloadFile, apiDeleteFile, apiSearch };

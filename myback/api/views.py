@@ -20,7 +20,7 @@ class UserFiles(APIView):
 
 class DeleteFile(APIView):
     permission_classes = [IsAuthenticated]
-    def get(self, request):
+    def post(self, request):
         print(request.body)
         return Response([])
 
@@ -34,4 +34,16 @@ class SearchResults(APIView):
             {"id": "1", "filename": "!просто_приставка_вначале_" + fileName, "author": author},
             {"id": "2", "filename": fileName, "author": "!просто_приставка_вначале_" + author}
         ])
+
+class UploadFile(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        data = eval(request.body.decode("UTF-8"))
+        return Response([data["fileName"]])
+
+class GetFile(APIView):
+    permission_classes = []
+    def get(self, request):
+        return Response({"content": "asd", "name": "thisisname", "extension": ".weird"})
+
 
