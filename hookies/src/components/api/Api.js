@@ -112,12 +112,13 @@ function apiDownloadFile(fileId) {
   fetch('http://127.0.0.1:8000/api/get_file/', {
     headers: {
     },
-    method: 'GET',
+    method: 'POST',
+    body: JSON.stringify({"id": fileId})
   })
   .then(res => res.json())
   .then(data => {
     let fileContent = data["content"];
-    let fileName = data["name"];
+    let fileName = data["filename"];
     let fileExtension = data["extension"];
   
     const file = new File([fileContent], fileName + fileExtension, {

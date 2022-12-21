@@ -12,6 +12,15 @@ import json
 # Create your views here.
 
 
+def parse_files(user_files):
+    jsoned_files = json.loads(serializers.serialize('json', user_files))
+    result = []
+    for x in jsoned_files:
+        result.append(x["fields"])
+        result[-1]["id"] = x["pk"]
+    return result
+
+
 class UserInfo(APIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
@@ -52,12 +61,7 @@ class UserFiles(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         user_files = StoreFile.objects.filter(author=request.user.username)
-        jsoned_files = json.loads(serializers.serialize('json', user_files))
-        result = []
-        for x in jsoned_files:
-            result.append(x["fields"])
-            result[-1]["id"] = x["pk"]
-        return Response(result)
+        return Response(parse_files(user_files))
 
 
 class DeleteFile(APIView):
@@ -81,6 +85,8 @@ class SearchResults(APIView):
 
 class GetFile(APIView):
     permission_classes = []
-    def get(self, request):
-        return Response({"content": "asd", "name": "thisisname", "extension": ".weird"})
+    def post(self, request):
+        data = eval(request.body.decode("UTF-8"))
+        my_files = parse_files(StoreFile.objects.filter(id=int(data["id"])))
+        return Response(my_files[0])
 
