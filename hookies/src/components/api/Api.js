@@ -87,7 +87,19 @@ function apiUploadFile(username, fileName, originalName, fileText) {
 }
 
 function apiRegister(username, password, fullname, email, date_of_birth) {
-  return 1;
+  fetch('http://127.0.0.1:8000/api/register/', {
+    headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+    },
+    method: 'POST',
+    body: JSON.stringify({"username": username, "password": password, "first_name": fullname, "last_name": date_of_birth, "email": email})
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
+    alert("User registered")
+    window.location.href = "/login";
+  })
 }
 
 function apiDownloadFile(fileId) {
@@ -98,9 +110,6 @@ function apiDownloadFile(fileId) {
   })
   .then(res => res.json())
   .then(data => {
-    //let fileContent = "contentfromsite" + fileId;
-    //let fileName = "filename.fromsite";
-    //let fileExtension = ".txt";
     let fileContent = data["content"];
     let fileName = data["name"];
     let fileExtension = data["extension"];

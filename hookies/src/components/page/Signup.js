@@ -4,11 +4,6 @@ import { apiRegister } from '../api/Api';
 
 function registrationHandler(data) {
   let successRegistration = apiRegister(data["username"], data["password"], data["fullname"], data["email"], data["date_of_birth"]);
-  if (successRegistration !== 1) {
-    alert("Registration was not successfull");
-  } else {
-    window.location.href = "/login";
-  }
 }
 
 function Signup(props) {

@@ -22,5 +22,6 @@ urlpatterns = [
     path("delete_file/", DeleteFile.as_view()),
     path("search/", SearchResults.as_view()),
     path("upload_file/", UploadFile.as_view()),
-    path("get_file/", GetFile.as_view())
+    path("get_file/", GetFile.as_view()),
+    path('register/', RegisterApi.as_view()),
 ]
