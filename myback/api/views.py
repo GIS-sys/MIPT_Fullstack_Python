@@ -76,12 +76,19 @@ class SearchResults(APIView):
     permission_classes = []
     def post(self, request):
         data = eval(request.body.decode("UTF-8"))
-        fileName = data["fileName"]
+        file_name = data["fileName"]
         author = data["author"]
-        return Response([
-            {"id": "1", "filename": "!просто_приставка_вначале_" + fileName, "author": author},
-            {"id": "2", "filename": fileName, "author": "!просто_приставка_вначале_" + author}
-        ])
+        date_from = data["dateFrom"]
+        if not date_from:
+            date_from = "1900-01-01"
+        date_to = data["dateTo"]
+        if not date_to:
+            date_to = "2099-01-01"
+        my_files = parse_files(StoreFile.objects.filter(author__contains=author,
+                                                        filename__contains=file_name,
+                                                        date__gte=date_from,
+                                                        date__lte=date_to))
+        return Response(my_files)
 
 class GetFile(APIView):
     permission_classes = []

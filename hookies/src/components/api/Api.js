@@ -118,7 +118,7 @@ function apiDownloadFile(fileId) {
   .then(res => res.json())
   .then(data => {
     let fileContent = data["content"];
-    let fileName = data["filename"];
+    let fileName = data["original_name"];
     let fileExtension = data["extension"];
   
     const file = new File([fileContent], fileName + fileExtension, {
