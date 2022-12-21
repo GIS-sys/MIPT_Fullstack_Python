@@ -4,14 +4,17 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from api.serializer import RegisterSerializer, UserSerializer
 from django.contrib.auth.models import User
+#from rest_framework.authtoken.models import Token
 
 # Create your views here.
 
 
 class UserInfo(APIView):
     permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
     def get(self, request):
-        return Response({"email": str(request.headers), "fullname": "api_user_fullnamew", "date_of_birth": "api_user_date_of_birthw"})
+        username = request.user
+        return Response({"email": username, "fullname": "fullnametmp", "date_of_birth": "api_user_date_of_birthw"})
 
 
 class UserFiles(APIView):
@@ -27,7 +30,6 @@ class UserFiles(APIView):
 class DeleteFile(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request):
-        print(request.body)
         return Response([])
 
 
