@@ -18,7 +18,6 @@ function downloadFile(fileId) {
 
 function deleteFile(fileId) {
   apiDeleteFile(fileId);
-  window.location.href = "/account";
 }
 
 function Account(props) {
@@ -29,10 +28,15 @@ function Account(props) {
   } = useForm();
 
   apiGetUserFiles((data) => {
-    let files = data;
+    let last = localStorage.getItem("myfiles");
+    localStorage.setItem("myfiles", JSON.stringify(data));
+    if (last != localStorage.getItem("myfiles")) window.location.href = "/account";
   });
-  let files = [{"id": "1", "filename": "первый файл", "is_deleted": false}];
-  
+  console.log(localStorage.getItem("myfiles")[1]);
+  let files = JSON.parse(localStorage.getItem("myfiles"));
+  if (!files) {
+    files = []
+  }
   return (
     <table style={{'tableLayout': 'fixed', 'width': '100%', 'height': '100%'}}>
       <tbody>

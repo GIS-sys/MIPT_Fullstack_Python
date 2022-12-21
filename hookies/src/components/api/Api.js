@@ -62,7 +62,6 @@ function apiGetUserFiles(callback) {
     })
     .then(res => res.json())
     .then(data => {
-      console.log("getuserdata" + data);
       callback(data);
     })
   });
@@ -79,7 +78,6 @@ function apiUploadFile(username, fileName, originalName, fileText) {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       alert("File uploaded")
       window.location.href = "/account";
     })
@@ -94,8 +92,16 @@ function apiRegister(username, password, fullname, email, date_of_birth) {
     method: 'POST',
     body: JSON.stringify({"username": username, "password": password, "first_name": fullname, "last_name": date_of_birth, "email": email})
   })
-  .then(res => res.json())
+  .then(res => {
+    if (res.ok) {
+        return res.json();
+    } else {
+        alert("Something wrong (probably email)")
+        return;
+    }
+  })
   .then(data => {
+    if (!data) return;
     console.log(data);
     alert("User registered")
     window.location.href = "/login";
@@ -135,11 +141,10 @@ function apiDeleteFile(fileId) {
           'Authorization': `Bearer ${data["access"]}`
       },
       method: 'POST',
-      body: JSON.stringify({"file": fileId})
+      body: JSON.stringify({"id": fileId})
     })
     .then(res => res.json())
     .then(data => {
-      alert("File deleted")
       window.location.href = "/account";
     })
   });
