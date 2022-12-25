@@ -153,7 +153,7 @@ function apiDeleteFile(fileId) {
 
 function apiSearch(fileName, author, dateFrom, dateTo, callback) {
   //getAccessToken(localStorage.getItem("refresh_token"), (data) => {
-    fetch('http://127.0.0.1:8000/api/search/', {
+    fetch('http://158.160.14.47:8000/api/search/', {
       headers: {
       },
       method: 'POST',

@@ -1,15 +1,3 @@
-function qwe() {
-  fetch('http://127.0.0.1:8000/auth_api/token',{
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: '{"username": "admin", "password": "admin" }'
-})
-.then(res => res.json())
-.then(data => console.log(data))
-}
-
 function Home(props) {
   return (
     <table style={{'tableLayout': 'fixed', 'width': '100%', 'height': '100%'}}>
@@ -32,7 +20,6 @@ function Home(props) {
           <td style={{"width": "30%"}}>
             <p>Егоров Гордей Андреевич</p>
             <p>студент 3 курса МФТИ</p>
-            <button onClick={qwe}></button>
           </td>
         </tr>
       </tbody>
