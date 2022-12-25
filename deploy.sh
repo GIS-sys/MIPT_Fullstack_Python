@@ -19,7 +19,7 @@ echo "Move node_modules on prod"
 ssh admin@158.160.14.47 "mv ./node_modules project/hookies/;"
 
 echo "Run"
-ssh admin@158.160.14.47 "screen -L -dm bash -c \"cd project/myback/; python3.8 manage.py runserver 8081\""
+ssh admin@158.160.14.47 "screen -L -dm bash -c \"cd project/myback/; python3.8 manage.py runserver 8000\""
 ssh admin@158.160.14.47 "screen -L -dm bash -c \"cd project/hookies/; npm run start\""
 
 echo "Done"
