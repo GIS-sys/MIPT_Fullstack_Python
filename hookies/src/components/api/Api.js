@@ -1,5 +1,5 @@
 function getAccessToken(refreshToken, callback) {
-  fetch('http://127.0.0.1:8000/auth_api/refresh',{
+  fetch(global.BACKEND_URL + '/auth_api/refresh',{
     method: 'POST',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -11,7 +11,7 @@ function getAccessToken(refreshToken, callback) {
 }
 
 function apiLogin(username, password) {
-  fetch('http://127.0.0.1:8000/auth_api/token',{
+  fetch(global.BACKEND_URL + '/auth_api/token',{
     method: 'POST',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -39,7 +39,7 @@ function apiLogin(username, password) {
 
 function apiGetUserData(callback) {
   getAccessToken(localStorage.getItem("refresh_token"), (data) => {
-    fetch('http://127.0.0.1:8000/api/userinfo/', {
+    fetch(global.BACKEND_URL + '/api/userinfo/', {
       headers: {
           'Authorization': `Bearer ${data["access"]}`
       }
@@ -55,7 +55,7 @@ function apiGetUserData(callback) {
 
 function apiGetUserFiles(callback) {
   getAccessToken(localStorage.getItem("refresh_token"), (data) => {
-    fetch('http://127.0.0.1:8000/api/userfiles/', {
+    fetch(global.BACKEND_URL + '/api/userfiles/', {
       headers: {
           'Authorization': `Bearer ${data["access"]}`
       }
@@ -69,7 +69,7 @@ function apiGetUserFiles(callback) {
 
 function apiUploadFile(username, fileName, originalName, fileText) {
   getAccessToken(localStorage.getItem("refresh_token"), (data) => {
-    fetch('http://127.0.0.1:8000/api/upload_file/', {
+    fetch(global.BACKEND_URL + '/api/upload_file/', {
       headers: {
           'Authorization': `Bearer ${data["access"]}`
       },
@@ -85,7 +85,7 @@ function apiUploadFile(username, fileName, originalName, fileText) {
 }
 
 function apiRegister(username, password, fullname, email, date_of_birth) {
-  fetch('http://127.0.0.1:8000/api/register/', {
+  fetch(global.BACKEND_URL + '/api/register/', {
     headers: {
         'Content-Type': 'application/json; charset=UTF-8'
     },
@@ -109,7 +109,7 @@ function apiRegister(username, password, fullname, email, date_of_birth) {
 }
 
 function apiDownloadFile(fileId) {
-  fetch('http://127.0.0.1:8000/api/get_file/', {
+  fetch(global.BACKEND_URL + '/api/get_file/', {
     headers: {
     },
     method: 'POST',
@@ -137,7 +137,7 @@ function apiDownloadFile(fileId) {
 
 function apiDeleteFile(fileId) {
   getAccessToken(localStorage.getItem("refresh_token"), (data) => {
-    fetch('http://127.0.0.1:8000/api/delete_file/', {
+    fetch(global.BACKEND_URL + '/api/delete_file/', {
       headers: {
           'Authorization': `Bearer ${data["access"]}`
       },
@@ -153,7 +153,7 @@ function apiDeleteFile(fileId) {
 
 function apiSearch(fileName, author, dateFrom, dateTo, callback) {
   //getAccessToken(localStorage.getItem("refresh_token"), (data) => {
-    fetch('http://158.160.14.47:8000/api/search/', {
+    fetch(global.BACKEND_URL + '/api/search/', {
       headers: {
       },
       method: 'POST',

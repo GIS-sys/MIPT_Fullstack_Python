@@ -20,7 +20,7 @@ ssh admin@158.160.14.47 "mv ./node_modules project/hookies/;"
 
 echo "Run"
 ssh admin@158.160.14.47 "screen -L -dm bash -c \"cd project/myback/; python3.8 manage.py runserver 0.0.0.0:8000\""
-ssh admin@158.160.14.47 "screen -L -dm bash -c \"cd project/hookies/; npm run start\""
+ssh admin@158.160.14.47 "screen -L -dm bash -c \"cd project/hookies/; export REACT_APP_BACKEND_URL=http://158.160.14.47:8000; npm run start\""
 
 echo "Done"
 
