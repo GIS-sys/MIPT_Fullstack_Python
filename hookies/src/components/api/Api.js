@@ -11,7 +11,7 @@ function getAccessToken(refreshToken, callback) {
 }
 
 function apiLogin(username, password) {
-  fetch('http://127.0.0.1:8000/auth_api/token',{
+  fetch('http://localhost:8081/auth_api/token',{
     method: 'POST',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -153,7 +153,7 @@ function apiDeleteFile(fileId) {
 
 function apiSearch(fileName, author, dateFrom, dateTo, callback) {
   //getAccessToken(localStorage.getItem("refresh_token"), (data) => {
-    fetch('http://127.0.0.1:8000/api/search/', {
+    fetch('http://158.160.14.47:8081/api/search/', {
       headers: {
       },
       method: 'POST',

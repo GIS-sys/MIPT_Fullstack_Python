@@ -8,7 +8,7 @@ cp -r MIPT_Fullstack_project copy
 rm -r copy/hookies/node_modules
 scp -q -o LogLevel=QUIET -rp ./copy/* admin@158.160.14.47:~/project
 
-python3.8 manage.py runserver
+python3.8 manage.py runserver 8081
 
 npm run start
 
