@@ -50,6 +50,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:8000"
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
