@@ -22,6 +22,8 @@ function Search(props) {
   if (!searchResults) {
     searchResults = []
   }
+  let todate = new Date();
+  console.log(todate);
   return (
     <table style={{'tableLayout': 'fixed', 'width': '100%', 'height': '100%'}}>
       <tbody>
@@ -29,21 +31,29 @@ function Search(props) {
           <td style={{"width": "30%"}}>
           <form onSubmit={handleSubmit(searchHandler)}>
               <div>
-                  <label>Название файла</label>
+                  <label style={{"text-align": "left"}}>Название файла</label>
+                  <br></br>
                   <input {...register('filename')} />
               </div>
+              <p></p>
               <div>
                   <label>Автор</label>
+                  <br></br>
                   <input {...register('author')} />
               </div>
+              <p></p>
               <div>
                   <label>Дата (от)</label>
-                  <input type="date" {...register('datefrom')} />
+                  <br></br>
+                  <input type="date" value="1900-01-01" {...register('datefrom')} />
               </div>
+              <p></p>
               <div>
                   <label>Дата (по)</label>
-                  <input type="date" {...register('dateto')} />
+                  <br></br>
+                  <input type="date" value={{todate}} {...register('dateto')} />
               </div>
+              <p></p>
               <button>Search</button>
             </form>
           </td>

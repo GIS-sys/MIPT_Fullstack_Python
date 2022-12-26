@@ -50,10 +50,10 @@ function Account(props) {
           </td>
           <td rowSpan="2" style={{"width": "60%"}}>
             {files.map(elem => (
-              <div key={elem.id}>
-                <p>{elem.filename}</p>
-                <button onClick={() => downloadFile(elem.id)}>Скачать</button>
-                <button onClick={() => deleteFile(elem.id)}>Удалить</button>
+              <div key={elem.id} style={{"justifyContent": "space-around", "width": "100%", "textAlign": "center", "display": "flex", "margin-top": "10px"}}>
+                <p style={{"margin": "0px", "width": "33%"}}>{elem.filename}</p>
+                <div style={{"width": "33%"}}><button onClick={() => downloadFile(elem.id)}>Скачать</button></div>
+                <div style={{"width": "33%"}}><button onClick={() => deleteFile(elem.id)}>Удалить</button></div>
               </div>
             ))}
           </td>

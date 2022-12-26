@@ -1,3 +1,7 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
     min-width: 100vw;
     min-height: 100vh;
@@ -7,15 +11,31 @@ body {
     font-size : 20px;
 }
 
-div, input, button {
+div, input {
   margin: 0.5vw;
 }
 
-
-
-a {
-  margin: 0 8vw;
+button {
+    cursor: pointer;
+    background: linear-gradient(to bottom, #333, #AAA 50%, #333 100%);
+    border: 0px;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 4px 8px 10px black;
+    height: fit-content;
 }
+
+button:hover {
+    margin-top: 3px;
+    margin-bottom: -3px;
+    margin-left: 3px;
+    margin-right: -3px;
+    box-shadow: 6px 5px 10px black;
+}
+
+/*a {
+  margin: 0 8vw;
+}*/
 
 button {
   font-size : 100%;
@@ -33,6 +53,9 @@ tr, td {
 }
 
 
+a.in_menu {
+  width: 33%;;
+}
 
 #header-wrapper {
   position: fixed;

@@ -6,29 +6,29 @@ function Header(props) {
   }
   if (authorized) {
     account_or_login = (
-      <a href="/account">
+      <a href="/account" className="in_menu">
         <button>Личный кабинет</button>
       </a>
     )
   } else {
     account_or_login = (
-      <a href="/login">
+      <a href="/login" className="in_menu">
         <button>Войти</button>
       </a>
     )
   }
   return (
-    <div id="header-wrapper" style={{"margin": "0px"}}>
-		  <nav id="header">
-        <a href="/search">
-          <button>Поиск</button>
-        </a>
-        <a href="/">
-          <button>О проекте</button>
-        </a>
-        {account_or_login}
-      </nav>
-	  </div>
+    <div id="header-wrapper" style={{"margin": "0px", "width": "100%"}}>
+        <nav id="header" style={{"width": "100%", "justifyContent": "space-between", "display": "flex"}}>
+            <a href="/search" className="in_menu">
+                <button>Поиск</button>
+            </a>
+            <a href="/" className="in_menu">
+                <button>О проекте</button>
+            </a>
+            {account_or_login}
+        </nav>
+    </div>
   );
 }
 
