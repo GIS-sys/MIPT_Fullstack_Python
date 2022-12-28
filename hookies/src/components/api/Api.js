@@ -5,9 +5,17 @@ function getAccessToken(refreshToken, callback) {
         'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify({"refresh": refreshToken})
-})
-.then(res => res.json())
-.then(data => callback(data))
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data["code"] == "token_not_valid") {
+        localStorage.setItem("refresh_token", "");
+        localStorage.setItem("is_authorized", "");
+        window.location.href = "/";
+        return;
+    }
+    callback(data);
+  })
 }
 
 function apiLogin(username, password) {
